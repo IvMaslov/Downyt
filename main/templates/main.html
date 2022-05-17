@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<! -- Bootstrap -- >
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"> -->
+
+	<! -- Javascript -- >
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		Downyt
+	</title>
+</head>
+<body>
+	<div class="all_window">
+		{% include "nav.html" %}
+
+	<form>
+		<input class="form-control mr-2" id="search_line" type="search" placeholder="Search" aria-label="Search">
+    	<button class="btn btn-outline-success" id = "search_button" type="submit">Search</button>
+	</form>
+
+	<script type="text/javascript">
+	$("#search_button").click(function (e) {
+  e.preventDefault();
+  var value_url = $("#search_line").val();
+  $("#search_line").val("");
+  var url = new URL(value_url);
+  for (let [name, value] of url.searchParams) {
+    if (name == "v") 
+    	{
+    		url = new URL(document.URL);
+    		url = url.origin;
+    		var data = `${url}/videos/${value}`;
+    		window.location.href = data;
+    	}
+  }
+});  </script>
+
+<!-- https://www.youtube.com/watch?v=AqdAtTu8Aes -->
+</body>
+</html>
